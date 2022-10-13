@@ -44,7 +44,25 @@ class GameTest {
     }
 
     @Test
-    public void shouldThrowNotRegisteredException() {
+    public void multipleRegisterWithRepeatTest() {
+        Game game = new Game();
+        game.register(testPlayer1);
+        game.register(testPlayer1);
+        List<Player> actual = game.getRegisteredPlayers();
+        List<Player> expected = List.of(testPlayer1);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldThrowNotRegisteredExceptionPlayer1() {
+        Game game = new Game();
+        game.register(testPlayer1);
+        game.register(testPlayer2);
+        assertThrows(NotRegisteredException.class, () -> game.round("Vova", "Vasya"));
+    }
+
+    @Test
+    public void shouldThrowNotRegisteredExceptionPlayer2() {
         Game game = new Game();
         game.register(testPlayer1);
         game.register(testPlayer2);

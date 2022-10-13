@@ -1,12 +1,11 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Player;
 import ru.netology.exception.NotRegisteredException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +18,8 @@ class GameTest {
     @Test
     public void emptyRegisterTest() {
         Game game = new Game();
-        List<Player> actual = game.getRegisteredPlayers();
-        List<Player> expected = List.of();
+        HashMap<String, Player> actual = game.getRegisteredPlayers();
+        HashMap<String, Player> expected = new HashMap<>();
         assertEquals(expected, actual);
     }
 
@@ -28,8 +27,8 @@ class GameTest {
     public void singleRegisterTest() {
         Game game = new Game();
         game.register(testPlayer1);
-        List<Player> actual = game.getRegisteredPlayers();
-        List<Player> expected = List.of(testPlayer1);
+        HashMap<String, Player> actual = game.getRegisteredPlayers();
+        Map<String, Player> expected = Map.of(testPlayer1.getName(), testPlayer1);
         assertEquals(expected, actual);
     }
 
@@ -38,8 +37,9 @@ class GameTest {
         Game game = new Game();
         game.register(testPlayer1);
         game.register(testPlayer2);
-        List<Player> actual = game.getRegisteredPlayers();
-        List<Player> expected = List.of(testPlayer1, testPlayer2);
+        HashMap<String, Player> actual = game.getRegisteredPlayers();
+        Map<String, Player> expected = Map.of(testPlayer1.getName(), testPlayer1,
+                                              testPlayer2.getName(), testPlayer2);
         assertEquals(expected, actual);
     }
 
@@ -48,8 +48,8 @@ class GameTest {
         Game game = new Game();
         game.register(testPlayer1);
         game.register(testPlayer1);
-        List<Player> actual = game.getRegisteredPlayers();
-        List<Player> expected = List.of(testPlayer1);
+        HashMap<String, Player> actual = game.getRegisteredPlayers();
+        Map<String, Player> expected = Map.of(testPlayer1.getName(), testPlayer1);
         assertEquals(expected, actual);
     }
 
